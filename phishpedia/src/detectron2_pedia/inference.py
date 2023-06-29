@@ -22,7 +22,7 @@ def pred_rcnn(im, predictor):
         return None, None, None, None
 
     outputs = predictor(im)
-    print("OUTPUT --------> ", outputs)
+    # print("OUTPUT --------> ", outputs)
 
     instances = outputs['instances']
     print("instances --------> ", instances)
@@ -52,6 +52,7 @@ def config_rcnn(cfg_path, weights_path, conf_threshold):
     cfg.merge_from_file(cfg_path)
     cfg.MODEL.WEIGHTS = weights_path
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = conf_threshold
+    cfg.MODEL.DEVICE = "cpu"
     # uncomment if you installed detectron2 cpu version
     # cfg.MODEL.DEVICE = 'cpu'
 

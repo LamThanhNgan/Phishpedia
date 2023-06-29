@@ -39,8 +39,14 @@ def phishpedia_prediction(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE
 
     ####################### Step1: layout detector ##############################################
     # logo_boxes, logo_scores, input_boxes, input_scores
-    pred_boxes, _, input_boxes, input_scores = pred_rcnn(im=screenshot_path, predictor=ELE_MODEL)
-    print("------------->", input_boxes)
+    pred_boxes, logo_scores, input_boxes, input_scores = pred_rcnn(im=screenshot_path, predictor=ELE_MODEL)
+    print("======================RCNN=====================")
+    print("Logo: ", pred_boxes)
+    print("Logo score: ", logo_scores)
+    print("Input boxes: ", input_boxes)
+    print("Input score: ", input_scores)
+
+
     if pred_boxes is not None:
         pred_boxes = pred_boxes.detach().cpu().numpy()
         input_boxes = input_boxes.detach().cpu().numpy()
@@ -146,7 +152,7 @@ def runit(full_path,  ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEATS, LOGO_F
 
         if plotvis_input is not None and co is not None:
             # print("input_scores --------> ", input_scores)
-            cv2.putText(plotvis_input, "Input box detection",
+            cv2.putText(plotvis_input, "Detect input boxes to enter your information.",
                     (int(co[0] + 50), int(co[1] + 80)),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.8, (11, 77, 218), 2)
             cv2.imwrite(img_path, plotvis_input)

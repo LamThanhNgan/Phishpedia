@@ -124,8 +124,8 @@ def phishpedia_classifier_logo(logo_boxes,
                                                                     logo_feat_list, file_name_list,
                                                                     shot_path, bbox, t_s=ts, grayscale=False)
             
-            print("domain_this: ", domain_this)
-            print("url: ", tldextract.extract(url).domain)
+            print("Domains: ", domain_this)
+            
             if domain_this is None:
                 isBegninDomains = False
             else: 
@@ -146,8 +146,12 @@ def phishpedia_classifier_logo(logo_boxes,
             if i >= 2:  # only look at top-2 logo
                 break
             pred_target = target_this
+            print("Target: ", pred_target)
             matched_coord = coord
             siamese_conf = this_conf
+            print("Matched Coord: ", matched_coord)
+            print("Conf: ", siamese_conf)
+
             if pred_target is not None:
                 break
 
